@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue_menu">#82B1FF</color>
+    <color name="acent">#B047518B</color>
+    <color name="gray_start">#39393A</color>
+    <color name="gray_finish">#878993</color>
+    <color name="acent_word">#77F63DDD</color>
+    <color name="theme_app">#F6FAFD</color>
+    <color name="theme_app_test">#E4E4E4</color>
+    <color name="color_back_text">#6750A3</color>
+    <color name="color_button">#34C6CD</color>
+    <color name="toolbar_color">#5DC8CD</color>
+    <color name="color_label">#E165B9</color>
+    <color name="item_menu_color">#BF9E30</color>
+</resources>

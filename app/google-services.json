@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "516787115669",
+    "project_id": "smotrim-anime-app",
+    "storage_bucket": "smotrim-anime-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:516787115669:android:816c2d4ac3bfc0108d6d9c",
+        "android_client_info": {
+          "package_name": "com.mirea.kt.ribo.smotrimanime"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "516787115669-r9q7pqqbjqb5hem7ecq51c1pvoftu8ig.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsHrzloqFRpQMYw8ZiR4SRBkVlOUpEsT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "516787115669-r9q7pqqbjqb5hem7ecq51c1pvoftu8ig.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/acc_button"
+        android:title="Аккаунт"
+        android:icon="@drawable/baseline_account_circle_24" />
+    <item
+        android:id="@+id/favorite_titles_btn"
+        android:title="Любимое"
+        android:visible="false"
+        android:icon="@drawable/ic_action_favorite"
+        />
+    <item
+        android:id="@+id/watched_btn"
+        android:icon="@drawable/watched"
+        android:title="Просмотрено"
+        android:visible="false"/>
+    <item android:id="@+id/random_btn"
+        android:title="Случайное"
+        android:icon="@drawable/question_icon"/>
+
+</menu>
