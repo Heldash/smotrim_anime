@@ -11,8 +11,8 @@
     android:backgroundTintMode="src_over">
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/image_main"
-        android:layout_marginTop="10dp"
         android:layout_width="240dp"
+        android:layout_above="@id/auth_lin_layout"
         android:layout_height="240dp"
         android:padding="5dp"
         app:strokeWidth="3dp"
@@ -22,9 +22,10 @@
         android:src="@drawable/lycy"
         android:scaleType="centerCrop"/>
     <LinearLayout
-        android:layout_below="@id/image_main"
+        android:id="@+id/auth_lin_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:orientation="vertical"
         android:padding="15dp">
         <TextView
@@ -70,7 +71,7 @@
             android:drawablePadding="7dp"
             android:layout_marginHorizontal="20dp"/>
         <Button
-            android:id="@+id/loginBtn"
+            android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"

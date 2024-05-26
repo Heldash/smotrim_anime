@@ -3,19 +3,20 @@ package com.mirea.kt.ribo.smotrimanime.rec_views;
 public class AnimeItem {
     private String titleName,genres,description,imageUrl,typeAnime;
     private float raiting;
-    private int favorite,watched;
+    private int favorite,watched,id;
 
-    public AnimeItem(String titleName,  String description, String imageUrl, String typeAnime, float raiting) {
-        this.titleName = titleName;
-        this.description = description;
-        this.imageUrl = imageUrl;
-        this.typeAnime = typeAnime;
-        this.raiting = raiting;
-        this.favorite = 0;
-        this.watched = 0;
+    public AnimeItem() {
     }
 
-    public AnimeItem(String titleName, String genres, String description, String imageUrl, String typeAnime, float raiting, int favorite, int watched) {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public AnimeItem(String titleName, String genres, String description, String imageUrl, String typeAnime, float raiting, int favorite, int watched, int id) {
         this.titleName = titleName;
         this.genres = genres;
         this.description = description;
@@ -24,6 +25,7 @@ public class AnimeItem {
         this.raiting = raiting;
         this.favorite = favorite;
         this.watched = watched;
+        this.id = id;
     }
 
     public int getFavorite() {

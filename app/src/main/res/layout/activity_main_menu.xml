@@ -60,7 +60,7 @@
         android:id="@+id/frag_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.mirea.kt.ribo.smotrimanime.rec_views.anime_top_list" />
+        android:name="com.mirea.kt.ribo.smotrimanime.rec_views.anime_top_list"/>
 
 
 </LinearLayout>
@@ -80,6 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
         <TextView
+            android:id="@+id/logInOrOut"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
@@ -88,6 +89,7 @@
             android:textSize="18sp"
             android:gravity="center"
             android:padding="10dp"
+            android:clickable="true"
             android:layout_centerHorizontal="true"
             android:drawableStart="@drawable/login_icon"
             android:layout_alignParentBottom="true"/>

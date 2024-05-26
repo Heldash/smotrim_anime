@@ -35,6 +35,16 @@ public class SQLHelper extends SQLiteOpenHelper {
                 "typeAnime text," +
                 "favorite integer," +
                 "watched integer);");
+        db.execSQL("create table SAdsad (" +
+                "id integer," +
+                "name text," +
+                "description text," +
+                "raiting float," +
+                "genres text," +
+                "imageUrl text," +
+                "typeAnime text," +
+                "favorite integer," +
+                "watched integer);");
 //        favorite = 0|1
 //        watched = 0|1
     }

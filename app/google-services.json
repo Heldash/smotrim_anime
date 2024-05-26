@@ -2,6 +2,7 @@
   "project_info": {
     "project_number": "516787115669",
     "project_id": "smotrim-anime-app",
+    "firebase_url":"https://smotrim-anime-app-default-rtdb.europe-west1.firebasedatabase.app/",
     "storage_bucket": "smotrim-anime-app.appspot.com"
   },
   "client": [

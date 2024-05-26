@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 
 import com.mirea.kt.ribo.smotrimanime.R;
 
@@ -27,10 +29,15 @@ public class anime_top_list extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_anime_top_list, container, false);
         animeList = new ArrayList<>();
-        animeList.add(new AnimeItem("Title name","descr","https://shikimori.one/assets/globals/missing_original.jpg","tv",4.0f));
-        animeList.add(new AnimeItem("Title","descr","https://shikimori.one/assets/globals/missing_original.jpg","tv",4.5f));
-        animeList.add(new AnimeItem("Title name","descr","https://shikimori.one/assets/globals/missing_original.jpg","tv",4.5f));
-        animeList.add(new AnimeItem("Title name","descr","https://shikimori.one/assets/globals/missing_original.jpg","tv",4.5f));
+//        ArrayAdapter<String> sdsad = new ArrayAdapter<>(getContext(),R.layout.fragment_anime_top_list);
+        animeList.add(new AnimeItem("Title name","sadsadsadadad","descr","https://shikimori.one/assets/globals/missing_original.jpg","tv",4.0f,0,0,0));
+        animeList.add(new AnimeItem("Title name","sadsadsadadad","descr","https://shikimori.one/assets/globals/missing_original.jpg","tv",4.4f,0,0,0));
+        animeList.add(new AnimeItem("Title name","sadsadsadadad","descr","https://shikimori.one/assets/globals/missing_original.jpg","tv",4.7f,0,0,0));
+        animeList.add(new AnimeItem("Title name","sadsadsadadad","descr","https://shikimori.one/assets/globals/missing_original.jpg","tv",4.0f,0,0,0));
+        animeList.add(new AnimeItem("Title name","sadsadsadadad","descr","https://shikimori.one/assets/globals/missing_original.jpg","tv",3.0f,0,0,0));
+//        animeList.add(new AnimeItem("Title","descr","https://shikimori.one/assets/globals/missing_original.jpg","tv",4.5f));
+//        animeList.add(new AnimeItem("Title name","descr","https://shikimori.one/assets/globals/missing_original.jpg","tv",4.5f));
+//        animeList.add(new AnimeItem("Title name","descr","https://shikimori.one/assets/globals/missing_original.jpg","tv",4.5f));
         Log.d("On_create_view_Card",animeList.toString());
         RecyclerView recAnime = view.findViewById(R.id.anime_top_list);
         recAnime.setLayoutManager(new LinearLayoutManager(getContext(),

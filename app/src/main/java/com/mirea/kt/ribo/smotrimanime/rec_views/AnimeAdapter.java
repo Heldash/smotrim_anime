@@ -1,5 +1,6 @@
 package com.mirea.kt.ribo.smotrimanime.rec_views;
 
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import com.mirea.kt.ribo.smotrimanime.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.ViewHolder> {
 
@@ -28,7 +31,13 @@ public class AnimeAdapter extends RecyclerView.Adapter<AnimeAdapter.ViewHolder> 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_anime,parent,false);
         return new ViewHolder(view);
     }
-
+    public void correctList(float reating){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Stream<AnimeItem> an = animeList.stream();
+            animeList = an.filter(x->x.getRaiting()>reating).collect(Collectors.toCollection(ArrayList::new));
+            notifyDataSetChanged();
+        }
+    }
     @Override
     public void onBindViewHolder(@NonNull AnimeAdapter.ViewHolder holder, int position) {
         AnimeItem anime = animeList.get(position);
