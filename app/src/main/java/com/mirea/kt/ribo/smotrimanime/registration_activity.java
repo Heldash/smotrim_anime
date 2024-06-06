@@ -1,7 +1,6 @@
 package com.mirea.kt.ribo.smotrimanime;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -10,20 +9,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.mirea.kt.ribo.smotrimanime.rec_views.MainMenu;
 import com.mirea.kt.ribo.smotrimanime.utils_for_storage.Account;
 
 public class registration_activity extends AppCompatActivity implements OnCompleteListener{
@@ -85,12 +80,12 @@ public class registration_activity extends AppCompatActivity implements OnComple
                 DatabaseReference reference = database.getReference("Users");
                 String UID = user.getUid();
                 Log.d("User_UID",UID);
-                Account acc = new Account(username,email,UID,reference.getKey(),"");
+                Account acc = new Account(username,email,UID,"");
                 reference.child(UID).setValue(acc).addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()){
-                            Intent intent = new Intent(getApplicationContext(),mainMenu.class);
+                            Intent intent = new Intent(getApplicationContext(), MainMenu.class);
                             startActivity(intent);
                             finish();
                         }else {

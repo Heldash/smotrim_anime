@@ -8,17 +8,25 @@
         <item name="cornerSize">50%</item>
         <item name="cornerFamily">rounded</item>
     </style>
+    <style name="RoundPhotoTitle">
+        <item name="cornerSize">8dp</item>
+    </style>
     <style name="actionBtn" parent="@android:style/Widget.Button">
         <item name="android:gravity">center_vertical|center_horizontal</item>
         <item name="android:textColor">#FFFFFFFF</item>
-        <item name="android:shadowColor">#FF000000</item>
-        <item name="android:shadowDx">0</item>
-        <item name="android:shadowDy">-1</item>
-        <item name="android:shadowRadius">0.2</item>
         <item name="android:textSize">16dip</item>
         <item name="android:textStyle">bold</item>
         <item name="android:background">@drawable/btn_shape</item>
-        <item name="backgroundColor">@color/material_dynamic_primary50</item>
+        <item name="backgroundTint">@color/material_dynamic_primary50</item>
+    </style>
+    <style name="NavDrawerTextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="color">@color/white</item>
+        <item name="customColorDrawableValue">@color/white</item>
+    </style>
+    <style name="ButtonNightStyle" parent="TextAppearance.AppCompat.Button">
+        <item name="buttonTint">@color/white</item>
+        <item name="strokeColor">@color/gray_finish</item>
     </style>
 
 

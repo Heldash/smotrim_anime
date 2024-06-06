@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="26sp"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="РЕГИСТРАЦИЯ"
             android:layout_gravity="center"/>
         <EditText
@@ -85,6 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_gravity="center"
+            android:theme="@style/actionBtn"
             android:text="Регистрация"
             android:textSize="24sp"/>
 

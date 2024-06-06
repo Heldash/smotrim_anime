@@ -1,95 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="200dp"
     android:layout_marginBottom="10dp"
-    app:cardCornerRadius="30dp"
     android:backgroundTintMode="src_atop"
-    app:cardBackgroundColor="#acc4cc">
-    <LinearLayout
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:dividerHeight="0.0px"
+    android:elevation="8dp"
+    android:padding="10dp"
+    app:cardElevation="3dp"
+    app:cardPreventCornerOverlap="false">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
+
         android:orientation="horizontal">
-        <ImageView
+
+        <ImageButton
+            android:id="@+id/izbran"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="3dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@+id/watched_btn"
+            app:layout_constraintEnd_toEndOf="@+id/watched_btn"
+            android:src="@drawable/bookmark_empty"
+            app:tint="@color/gray_finish" />
+
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/anime_poster_card"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="125dp"
+            android:layout_height="175dp"
             android:layout_margin="10dp"
-
+            android:scaleType="centerCrop"
             android:src="@drawable/no_image"
-            />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/RoundPhotoTitle" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp">
-            <TextView
-                android:id="@+id/title_anime_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="2"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:text="Название"
-                android:paddingHorizontal="5dp"
-                android:textSize="20sp"/>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="3dp"
-                android:backgroundTint="@color/black"
-                android:background="@drawable/line_drawble"
-                android:layout_marginVertical="3dp"
-                android:layout_marginRight="30dp" />
-<!--                <TextView-->
-<!--                    android:id="@+id/genres_texts_view_card"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:paddingHorizontal="5dp"-->
-<!--                    android:maxLines="1"-->
-<!--                    android:layout_height="wrap_content"-->
+        <TextView
+            android:id="@+id/title_anime_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:maxLines="3"
+            android:paddingRight="5dp"
+            android:text="Названиеsadsdas\n\ndsadsadasdasdasdasdasd"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@id/anime_poster_card"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/anime_poster_card" />
 
-<!--                    android:textSize="20sp"-->
-<!--                    android:text="Жанры"/>-->
-<!--                <View-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="3dp"-->
-<!--                    android:maxLines="1"-->
-<!--                    android:background="@drawable/line_drawble"-->
-<!--                    android:layout_marginVertical="3dp"-->
-<!--                    android:layout_marginEnd="30dp" />-->
-            <TextView
-                android:id="@+id/description_anime_card"
-                android:maxLines="4"
-                android:textColor="@color/black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="5dp"
-                android:textSize="20sp"
-                android:text="Описание\n\n\n\n"/>
-<!--                <View-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="3dp"-->
-<!--                    android:maxLines="1"-->
-<!--                    android:background="@drawable/line_drawble"-->
-<!--                    android:layout_marginVertical="3dp"-->
-<!--                    android:layout_marginEnd="30dp" />-->
-            <TextView
-                android:id="@+id/raiting_anime_card"
-                android:textColor="@color/black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:textSize="20sp"
-                android:text="5/5"
-                android:drawableStart="@drawable/raiting_star"
-                android:drawableTint="#E8D957"
-                android:drawablePadding="5dp"/>
+        <!--            <View-->
+        <!--                android:id="@+id/"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="3dp"-->
+        <!--                android:backgroundTint="@color/black"-->
+        <!--                android:background="@drawable/line_drawble"-->
+        <!--                android:layout_marginVertical="3dp"-->
+        <!--                android:layout_marginRight="30dp" />-->
+        <!--                <TextView-->
+        <!--                    android:id="@+id/genres_texts_view_card"-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:paddingHorizontal="5dp"-->
+        <!--                    android:maxLines="1"-->
+        <!--                    android:layout_height="wrap_content"-->
 
+        <!--                    android:textSize="20sp"-->
+        <!--                    android:text="Жанры"/>-->
+        <!--                <View-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="3dp"-->
+        <!--                    android:maxLines="1"-->
+        <!--                    android:background="@drawable/line_drawble"-->
+        <!--                    android:layout_marginVertical="3dp"-->
+        <!--                    android:layout_marginEnd="30dp" />-->
+        <!--            <TextView-->
+        <!--                android:id="@+id/description_anime_card"-->
+        <!--                android:maxLines="4"-->
+        <!--                android:textColor="@color/black"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:paddingHorizontal="5dp"-->
+        <!--                android:textSize="20sp"-->
+        <!--                android:text="Описание\n\n\n\n"/>-->
+        <!--                <View-->
+        <!--                    android:layout_width="match_parent"-->
+        <!--                    android:layout_height="3dp"-->
+        <!--                    android:maxLines="1"-->
+        <!--                    android:background="@drawable/line_drawble"-->
+        <!--                    android:layout_marginVertical="3dp"-->
+        <!--                    android:layout_marginEnd="30dp" />-->
+        <TextView
+            android:id="@+id/raiting_anime_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_anime_card"
+            android:drawableStart="@drawable/raiting_star"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:drawableTint="#E8D957"
+            android:maxLines="1"
+            android:text="10/10"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@id/anime_poster_card"
+            app:layout_constraintLeft_toRightOf="@id/anime_poster_card"
+            app:layout_constraintStart_toStartOf="@+id/year" />
 
-        </LinearLayout>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/status_anime"
+            android:background="@drawable/acent"
+            android:textSize="18sp"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="4dp"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:contentDescription="status"
+            android:text="Статус"
+            app:layout_constraintStart_toStartOf="@+id/title_anime_card"
+            app:layout_constraintTop_toBottomOf="@+id/title_anime_card" />
+
+        <TextView
+            android:id="@+id/year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Год"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/status_anime"
+            app:layout_constraintTop_toBottomOf="@+id/status_anime" />
+
+        <ImageButton
+            android:id="@+id/watched_btn"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="10dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="@+id/anime_poster_card"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/watched"
+            app:tint="@color/gray_finish"/>
+
+        <ImageButton
+            android:id="@+id/favorite_titles_btn"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/empty_favorite"
+            android:layout_marginBottom="3dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@+id/izbran"
+            app:layout_constraintEnd_toEndOf="@+id/izbran"
+            app:layout_constraintRight_toLeftOf="@id/izbran"
+
+            app:tint="@color/gray_finish" />
+
+        <TextView
+            android:id="@+id/season"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Сезон"
+            android:textSize="18sp"
+            android:layout_marginLeft="15dp"
+            app:layout_constraintBottom_toBottomOf="@+id/year"
+            app:layout_constraintStart_toEndOf="@+id/year"
+            app:layout_constraintTop_toTopOf="@+id/year"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
+<!--    app:cardBackgroundColor="#acc4cc"-->

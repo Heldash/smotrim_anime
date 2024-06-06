@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@color/white"
+
     android:backgroundTintMode="src_over">
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/image_main"
@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:background="@drawable/acent"
+            android:backgroundTint="@color/acent"
 
             android:layout_gravity="center"
             android:textColor="@color/white"
@@ -44,19 +45,22 @@
             android:gravity="center"/>
         <EditText
             android:id="@+id/loginPole"
-            android:hint="Логин"
+            android:hint="Почта"
+            android:inputType="textEmailAddress"
             android:background="@drawable/edit_text_border"
             android:layout_below="@id/loginText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingHorizontal="10dp"
-            android:drawableStart="@drawable/baseline_account_circle_24"
+            android:textColorHint="@color/gray_finish"
+            android:drawableStart="@drawable/mail_icon"
             android:layout_marginBottom="10dp"
             android:paddingVertical="10dp"
             android:drawablePadding="7dp"
             android:singleLine="true"
             android:layout_marginHorizontal="20dp"/>
         <EditText
+            android:textColorHint="@color/gray_finish"
             android:id="@+id/passwordPole"
             android:hint="Пароль"
             android:layout_below="@id/loginText"
@@ -77,6 +81,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_gravity="center"
             android:textSize="24sp"
+            android:theme="@style/actionBtn"
             android:backgroundTint="@color/color_button"
             android:layout_marginTop="10dp"
             android:text="ВОЙТИ"/>
@@ -107,11 +112,20 @@
                 android:layout_weight="0.5"
                 android:backgroundTint="@color/color_button"
                 android:paddingVertical="15dp"
+                android:theme="@style/actionBtn"
                 android:text="Войти как гость"
                 android:layout_marginHorizontal="10dp"/>
 
 
         </LinearLayout>
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Смирнов Игорь РИБО-01-22"
+        android:textSize="28sp"
+        android:layout_marginBottom="20dp"/>
 </RelativeLayout>
     <!--#907292"-->

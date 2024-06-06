@@ -1,14 +1,23 @@
 package com.mirea.kt.ribo.smotrimanime.utils_for_storage;
 
 public class Account {
-    private String userName,mail,UID,id_databese,avatarImgUrl;
+    private String userName,mail,UID,avatarImgUrl;
 
-    public Account(String userName, String mail, String UID, String id_databese, String avatarImgUrl) {
+    public Account(String userName, String mail, String UID, String avatarImgUrl) {
         this.userName = userName;
         this.mail = mail;
         this.UID = UID;
-        this.id_databese = id_databese;
         this.avatarImgUrl = avatarImgUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "userName='" + userName + '\'' +
+                ", mail='" + mail + '\'' +
+                ", UID='" + UID + '\'' +
+                ", avatarImgUrl='" + avatarImgUrl + '\'' +
+                '}';
     }
 
     public Account() {
@@ -36,5 +45,13 @@ public class Account {
 
     public void setUID(String UID) {
         this.UID = UID;
+    }
+
+    public String getAvatarImgUrl() {
+        return avatarImgUrl;
+    }
+
+    public void setAvatarImgUrl(String avatarImgUrl) {
+        this.avatarImgUrl = avatarImgUrl;
     }
 }

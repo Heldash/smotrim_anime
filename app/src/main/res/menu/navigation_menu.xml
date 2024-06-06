@@ -6,6 +6,14 @@
         android:title="Аккаунт"
         android:icon="@drawable/baseline_account_circle_24" />
     <item
+        android:id="@+id/home_page"
+        android:title="Главная"
+        android:icon="@drawable/home_page_icon" />
+    <item android:id="@+id/izbran"
+        android:title="Избранное"
+        android:visible="false"
+        android:icon="@drawable/bookmark_full"/>
+    <item
         android:id="@+id/favorite_titles_btn"
         android:title="Любимое"
         android:visible="false"

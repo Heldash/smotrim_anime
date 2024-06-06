@@ -13,5 +13,15 @@
     <color name="color_button">#34C6CD</color>
     <color name="toolbar_color">#5DC8CD</color>
     <color name="color_label">#E165B9</color>
+    <color name="color_red">@android:color/holo_red_light</color>
+    <color name="anons_red">#F46C6C</color>
+    <color name="winter_season">#26D1E6</color>
+    <color name="spring_season">#ffb7c5</color>
+    <color name="summer_season">#66BB6A</color>
+    <color name="automn_season">#FFE752</color>
+    <color name="realese_color">#66BB6A</color>
+    <color name="ongoing_color">#FFA726</color>
+    <color name="color_yellow">#FFFF00</color>
+    <color name="color_green">@android:color/holo_green_light</color>
     <color name="item_menu_color">#BF9E30</color>
 </resources>
