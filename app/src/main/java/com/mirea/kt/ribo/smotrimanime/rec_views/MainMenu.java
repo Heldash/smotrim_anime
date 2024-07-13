@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.telephony.ims.RcsUceAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -34,13 +33,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.mirea.kt.ribo.smotrimanime.AnimePageActivity;
 import com.mirea.kt.ribo.smotrimanime.MainActivity;
 import com.mirea.kt.ribo.smotrimanime.R;
-import com.mirea.kt.ribo.smotrimanime.rec_views.AnimeAdapter;
-import com.mirea.kt.ribo.smotrimanime.rec_views.AnimeItem;
-import com.mirea.kt.ribo.smotrimanime.rec_views.AnimeMainList;
-import com.mirea.kt.ribo.smotrimanime.rec_views.FavoriteList;
-import com.mirea.kt.ribo.smotrimanime.rec_views.FragmentWatched;
-import com.mirea.kt.ribo.smotrimanime.rec_views.IzbranFragment;
-import com.mirea.kt.ribo.smotrimanime.rec_views.SearchAnimeAdapter;
 import com.mirea.kt.ribo.smotrimanime.utils_for_storage.Account;
 import com.mirea.kt.ribo.smotrimanime.utils_for_storage.DBManager;
 import com.mirea.kt.ribo.smotrimanime.utils_for_storage.SQLHelper;
@@ -54,9 +46,7 @@ import com.squareup.picasso.Picasso;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -223,7 +213,7 @@ public class MainMenu extends AppCompatActivity implements SearchAnimeAdapter.On
                         View header = navigationView.getHeaderView(0);
                         TextView name_acc = header.findViewById(R.id.username_user);
                         name_acc.setText(account.getUserName());
-                        ShapeableImageView image_avatar = header.findViewById(R.id.avatar_user_drawer);
+                        ShapeableImageView image_avatar = header.findViewById(R.id.avatar_user);
                         if (!account.getAvatarImgUrl().isEmpty()) {
                             Picasso.get().load(account.getAvatarImgUrl()).error(R.drawable.no_image).into(image_avatar);
                         } else {

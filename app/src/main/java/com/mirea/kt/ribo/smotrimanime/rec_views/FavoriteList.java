@@ -67,6 +67,13 @@ public class FavoriteList extends Fragment implements AnimeAdapter.OnAnimeClickL
                 null, 4));
         user = mAuth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
+        database.getReference().child("tokens").get()
+                .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        tokens = task.getResult().getValue(TokenShiki.class);
+                    }
+                });
     }
 
     public void inicializeAdapter() {
@@ -139,7 +146,6 @@ public class FavoriteList extends Fragment implements AnimeAdapter.OnAnimeClickL
     public void onAnimeClick(AnimeItem anime, int position) {
         Bundle bundle = new Bundle();
 //        startActivity(new Intent(getContext(), AnimePageActivity.class),bundle);
-        shikiSendInfo(bundle, anime);
         Call<ArrayList<SovetRomanResSearch>> call = romanApi.getAnimeForName(anime.getTitleName());
         bundle.putInt("idShiki", anime.getId());
         bundle.putString("nameAnime", anime.getTitleName());

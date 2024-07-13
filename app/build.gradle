@@ -53,10 +53,12 @@ dependencies {
     implementation 'com.devbrackets.android:exomedia:5.1.0'
     implementation "com.squareup.okhttp3:okhttp:4.10.0"
     implementation "androidx.work:work-runtime:2.9.0"
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
     def dynamicanimation_version = '1.0.0'
     implementation "androidx.dynamicanimation:dynamicanimation:$dynamicanimation_version"
 
 
+    
     implementation libs.appcompat
     implementation libs.material
     implementation libs.activity

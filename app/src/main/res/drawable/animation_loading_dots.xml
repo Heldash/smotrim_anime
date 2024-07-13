@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/layer_load_frame" android:duration="50"/>
+    <item android:drawable="@drawable/layer_load_frame_1_left" android:duration="100"/>
+    <item android:drawable="@drawable/layer_load_frame_2_left" android:duration="100"/>
+    <item android:drawable="@drawable/layer_load_frame_3_left" android:duration="100"/>
+    <item android:drawable="@drawable/layer_load_frame_2_left" android:duration="100"/>
+    <item android:drawable="@drawable/layer_load_frame_1_left" android:duration="100"/>
+    <item android:drawable="@drawable/layer_load_frame" android:duration="50"/>
+    <item android:drawable="@drawable/layer_load_frame_1_center" android:duration="50"/>
+    <item android:drawable="@drawable/layer_load_frame_2_center" android:duration="50"/>
+    <item android:drawable="@drawable/layer_load_frame_3_center" android:duration="50"/>
+    <item android:drawable="@drawable/layer_load_frame_2_center" android:duration="50"/>
+    <item android:drawable="@drawable/layer_load_frame_1_center" android:duration="50"/>
+    <item android:drawable="@drawable/layer_load_frame" android:duration="50"/>
+    <item android:drawable="@drawable/layer_load_frame_1_right" android:duration="50"/>
+    <item android:drawable="@drawable/layer_load_frame_2_right" android:duration="50"/>
+    <item android:drawable="@drawable/layer_load_frame_3_right" android:duration="50"/>
+    <item android:drawable="@drawable/layer_load_frame_2_right" android:duration="50"/>
+    <item android:drawable="@drawable/layer_load_frame_1_right" android:duration="50"/>
+    <item android:drawable="@drawable/layer_load_frame" android:duration="50"/>
+
+</animation-list>

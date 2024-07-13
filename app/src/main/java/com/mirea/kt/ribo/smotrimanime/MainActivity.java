@@ -2,10 +2,15 @@ package com.mirea.kt.ribo.smotrimanime;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.text.Layout;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +27,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button regBtn,gusetBtn,authButton;
     private EditText loginEdText,passwordEdText;
+    private ImageView visiblePass;
     private FirebaseUser user;
     private FirebaseAuth mAuth;
     @Override
@@ -30,16 +36,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         if (user==null) {
-            Log.d("authoriz_blyat",user+"");
+            Log.d("authorization",user+"");
             setContentView(R.layout.activity_main);
             gusetBtn = findViewById(R.id.guest_btn);
             gusetBtn.setOnClickListener(v -> {
+//                View layout =(View) getResources().getLayout(R.layout.activity_registration);
+//                Animation anim = AnimationUtils.loadAnimation(this,R.anim.inner_video);
+//                setContentView(layout);
+//
                 Log.d("authorization_log", "start activity MainMenu");
                 startActivity(new Intent(getApplicationContext(), MainMenu.class));
                 finish();
             });
             regBtn = findViewById(R.id.reg_btn_auth);
             authButton = findViewById(R.id.loginButton);
+            visiblePass = findViewById(R.id.visible_password_reg);
+            visiblePass.setOnClickListener(v -> {
+                if (passwordEdText.getInputType() == 129) {
+                    passwordEdText.setInputType(InputType.TYPE_CLASS_TEXT);
+                } else {
+                    passwordEdText.setInputType(129);
+                }
+                passwordEdText.setSelection(passwordEdText.getText().length());
+            });
             authButton.setOnClickListener(v -> {
                 Log.d("Authorization", "loginnnnn");
                 String login = loginEdText.getText().toString();
@@ -55,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             loginEdText = findViewById(R.id.loginPole);
             passwordEdText = findViewById(R.id.passwordPole);
             regBtn.setOnClickListener(v -> startActivity(new Intent(this, registration_activity.class)));
+//            setContentView(R.layout.activity_registration);
         }else{
             startActivity(new Intent(this, MainMenu.class));
             finish();

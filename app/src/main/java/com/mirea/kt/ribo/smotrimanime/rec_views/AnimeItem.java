@@ -2,6 +2,7 @@ package com.mirea.kt.ribo.smotrimanime.rec_views;
 
 import android.util.Log;
 
+import com.mirea.kt.ribo.smotrimanime.utils_for_storage.Account;
 import com.mirea.kt.ribo.smotrimanime.utils_for_storage.DBManager;
 import com.mirea.kt.ribo.smotrimanime.utils_for_storage.SQLHelper;
 import com.mirea.kt.ribo.smotrimanime.utils_internet.shikikomori_object.AnimesObj;
@@ -27,6 +28,7 @@ public class AnimeItem {
 
     public AnimeItem(AnimesObj animeShiki) {
         this.animeShiki = animeShiki;
+        Account dfdefddf= new Account();
         this.titleName = animeShiki.getRussian();
         this.titleNameEnglish = animeShiki.getName();
         if (animeShiki.getStatus()!=null) {

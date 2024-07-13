@@ -1,0 +1,26 @@
+pluginManagement {
+    repositories {
+        google {
+            content {
+                includeGroupByRegex("com\\.android.*")
+                includeGroupByRegex("com\\.google.*")
+                includeGroupByRegex("androidx.*")
+            }
+        }
+        mavenCentral()
+        gradlePluginPortal()
+        jcenter()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+gradle.ext.androidxMediaModulePrefix = 'media-'
+apply from: file("D:\\Android_prjects\\media\\core_settings.gradle")
+gradle.ext.androidxMediaEnableMidiModule = true
+rootProject.name = "Smotrim anime"
+include ':app'

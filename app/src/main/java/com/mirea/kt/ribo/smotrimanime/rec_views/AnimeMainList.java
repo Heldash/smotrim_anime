@@ -3,6 +3,10 @@ package com.mirea.kt.ribo.smotrimanime.rec_views;
 import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
+import android.graphics.drawable.AnimationDrawable;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 
 import androidx.activity.result.ActivityResult;
@@ -14,11 +18,17 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -31,6 +41,7 @@ import com.mirea.kt.ribo.smotrimanime.AnimePageActivity;
 import com.mirea.kt.ribo.smotrimanime.R;
 import com.mirea.kt.ribo.smotrimanime.utils_for_storage.DBManager;
 import com.mirea.kt.ribo.smotrimanime.utils_for_storage.SQLHelper;
+import com.mirea.kt.ribo.smotrimanime.utils_internet.NetworkUtils;
 import com.mirea.kt.ribo.smotrimanime.utils_internet.ShikikomoriApi;
 import com.mirea.kt.ribo.smotrimanime.utils_internet.SovetRomanticaApi;
 import com.mirea.kt.ribo.smotrimanime.utils_internet.TokenShiki;
@@ -41,6 +52,7 @@ import com.mirea.kt.ribo.smotrimanime.utils_internet.sovetRomObj.SovetRomanResSe
 
 import java.util.ArrayList;
 
+import pl.droidsonroids.gif.GifImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -49,6 +61,7 @@ public class AnimeMainList extends Fragment implements AnimeAdapter.OnAnimeClick
     private ArrayList<AnimeItem> animeList;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
+    ImageView loading_list;
     DBManager dbManager;
     private AnimeAdapter adapter;
     private ShikikomoriApi shikikomoriApi;
@@ -57,6 +70,8 @@ public class AnimeMainList extends Fragment implements AnimeAdapter.OnAnimeClick
     private SovetRomanticaApi sovetRomanticaApi;
     private ShikikomoriApi.Api shikiApi;
     private TokenShiki tokens;
+    private RelativeLayout notEthernetConnect;
+    private Handler handler = new Handler(Looper.getMainLooper());
     public AnimeMainList() {
     }
 
@@ -76,6 +91,7 @@ public class AnimeMainList extends Fragment implements AnimeAdapter.OnAnimeClick
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        ConnectivityManager manager = (ConnectivityManager) getContext().getSystemService(getContext().CONNECTIVITY_SERVICE);
         inicialParametres();
         View view = inflater.inflate(R.layout.fragment_anime_top_list, container, false);
 
@@ -86,7 +102,20 @@ public class AnimeMainList extends Fragment implements AnimeAdapter.OnAnimeClick
         inicializeAdapter(view);
         adapter = new AnimeAdapter(animeList,database,getContext(),dbManager,this);
         recAnime.setAdapter(adapter);
+        loading_list = view.findViewById(R.id.load_list_animation);
+        loading_list.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            @Override
+            public void onViewAttachedToWindow(@NonNull View v) {
+                AnimationDrawable anim = (AnimationDrawable) loading_list.getDrawable();
+                anim.start();
+            }
 
+            @Override
+            public void onViewDetachedFromWindow(@NonNull View v) {
+
+            }
+        });
+        notEthernetConnect = view.findViewById(R.id.no_internet_place);
         recAnime.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -99,6 +128,76 @@ public class AnimeMainList extends Fragment implements AnimeAdapter.OnAnimeClick
                 }
             }
         });
+        Thread waitLoading = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (adapter.getItemCount()<=0){
+                    if (NetworkUtils.isNetworkConnected(getContext())){
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                loading_list.setVisibility(View.VISIBLE);
+                                notEthernetConnect.setVisibility(View.GONE);
+                            }
+                        });
+
+                    }else{
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                loading_list.setVisibility(View.GONE);
+                                notEthernetConnect.setVisibility(View.VISIBLE);
+                            }
+                        });
+                    }
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Animation listAppear= AnimationUtils.loadAnimation(getContext(),
+                                R.anim.poyav_list);
+                        Animation resizeSmall=  AnimationUtils.loadAnimation(getContext(),
+                                R.anim.very_small);
+                        resizeSmall.setAnimationListener(new Animation.AnimationListener() {
+                            @Override
+                            public void onAnimationStart(Animation animation) {
+
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
+                                recAnime.setVisibility(View.VISIBLE);
+                                recAnime.startAnimation(listAppear);
+                                loading_list.post(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        AnimationDrawable anim = (AnimationDrawable) loading_list.getDrawable();
+                                        anim.stop();
+                                    }
+                                });
+                                loading_list.setVisibility(View.GONE);
+                            }
+
+                            @Override
+                            public void onAnimationRepeat(Animation animation) {
+
+                            }
+                        });
+                        loading_list.startAnimation(resizeSmall);
+
+
+                    }
+                });
+            }
+
+        });
+        waitLoading.start();
+
 
         shikikomoriApi = new ShikikomoriApi(mAuth,database);
         shikiApi = shikikomoriApi.getApi();
@@ -422,6 +521,8 @@ public class AnimeMainList extends Fragment implements AnimeAdapter.OnAnimeClick
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
+                    Log.d("chagedWathedIzFav","sssssssssssss"+result.getData()+
+                            "\n"+result.getResultCode());
                     if (result.getData()!=null){
                         boolean edited = result.getData().getBooleanExtra("edited",false);
                         Log.d("chagedWathedIzFav","edited: "+edited);

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/circle_1"
+        android:width="6dp"
+
+        android:height="6dp"
+        android:drawable="@drawable/dot_loading_vector"
+        android:gravity="left|center"
+        android:right="15dp" />
+    <item
+        android:width="8dp"
+        android:height="8dp"
+        android:drawable="@drawable/dot_loading_vector"
+        android:gravity="center" />
+    <item
+        android:width="6dp"
+        android:height="6dp"
+        android:left="15dp"
+        android:drawable="@drawable/dot_loading_vector"
+        android:gravity="right|center" />
+</layer-list>

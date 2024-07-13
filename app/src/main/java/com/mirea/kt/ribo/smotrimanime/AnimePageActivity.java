@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -41,6 +43,7 @@ import com.squareup.picasso.Picasso;
 public class AnimePageActivity extends AppCompatActivity implements View.OnClickListener {
 
     private boolean edited_obj;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
@@ -53,7 +56,7 @@ public class AnimePageActivity extends AppCompatActivity implements View.OnClick
                 fav_icon.mutate();
                 fav_icon.setColorFilter(getResources().getColor(R.color.color_red), PorterDuff.Mode.SRC_ATOP);
             }
-        }else {
+        } else {
             Drawable fav_icon = menu.findItem(R.id.fav_menu_btn).getIcon();
             if (fav_icon != null) {
                 fav_icon.mutate();
@@ -67,7 +70,7 @@ public class AnimePageActivity extends AppCompatActivity implements View.OnClick
                 icon.mutate();
                 icon.setColorFilter(getResources().getColor(R.color.color_yellow), PorterDuff.Mode.SRC_ATOP);
             }
-        }else {
+        } else {
             Drawable icon = menu.findItem(R.id.izbran_menu_btn).getIcon();
             if (icon != null) {
                 icon.mutate();
@@ -75,13 +78,13 @@ public class AnimePageActivity extends AppCompatActivity implements View.OnClick
             }
         }
         if (animeFromDatabase.getWatched() == 1) {
-            Log.d("WatchedOrNo","true");
+            Log.d("WatchedOrNo", "true");
             Drawable icon = menu.findItem(R.id.watched_menu_btn).getIcon();
             if (icon != null) {
                 icon.mutate();
                 icon.setColorFilter(getResources().getColor(R.color.color_green), PorterDuff.Mode.SRC_ATOP);
             }
-        }else{
+        } else {
             Drawable icon = menu.findItem(R.id.watched_menu_btn).getIcon();
             if (icon != null) {
                 icon.mutate();
@@ -98,103 +101,109 @@ public class AnimePageActivity extends AppCompatActivity implements View.OnClick
 //        return super.onOptionsItemSelected(item);
         edited_obj = true;
         AnimeItem animeDatabase = dbManager.getAnime(animeInfo.getIdShiki());
-        Log.d("ANIME_INFO",animeDatabase.toString());
-        if (user == null){
-            Toast.makeText(this, "Для выполнения действия требуется авторизация", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (item.getItemId() == R.id.fav_menu_btn) {
-            if (animeDatabase.getFavorite() == 0) {
-                boolean result = dbManager.addFavoriteAnime(animeInfo.getIdShiki());
-                if (result) {
-                    item.setIcon(R.drawable.ic_action_favorite);
-                    Drawable icon = item.getIcon();
-                    if (icon != null) {
-                        icon.mutate();
-                        icon.setColorFilter(getResources().getColor(R.color.color_red), PorterDuff.Mode.SRC_ATOP);
-                    }
-                    Toast.makeText(this, "Добавленно в любимое", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "Ошибка при добавлении", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                boolean result = dbManager.diasableFavoriteAnime(animeInfo.getIdShiki());
-                if (result) {
-                    item.setIcon(R.drawable.empty_favorite);
-                    Drawable icon = item.getIcon();
-                    if (icon != null) {
-                        icon.mutate();
-                        icon.setColorFilter(getResources().getColor(R.color.gray_finish), PorterDuff.Mode.SRC_ATOP);
-                    }
-                    Toast.makeText(this, "Удалено из любимых", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "Ошибка при удалении", Toast.LENGTH_SHORT).show();
-                }
-            }
-            return true;
-        } else if (item.getItemId() == R.id.izbran_menu_btn) {
-            if (animeDatabase.getIzbran() == 0) {
-                boolean result = dbManager.addIzbranAnime(animeInfo.getIdShiki());
-                if (result) {
-                    item.setIcon(R.drawable.bookmark_full);
-                    Drawable icon = item.getIcon();
-                    if (icon != null) {
-                        icon.mutate();
-                        icon.setColorFilter(getResources().getColor(R.color.color_yellow), PorterDuff.Mode.SRC_ATOP);
-                    }
-                    Toast.makeText(this, "Добавленно в избранное", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "Ошибка при добавлении", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                boolean result = dbManager.diasableIzbranAnime(animeInfo.getIdShiki());
-                if (result) {
-                    item.setIcon(R.drawable.bookmark_empty);
-                    Drawable icon = item.getIcon();
-                    if (icon != null) {
-                        icon.mutate();
-                        icon.setColorFilter(getResources().getColor(R.color.gray_finish), PorterDuff.Mode.SRC_ATOP);
-                    }
-                    Toast.makeText(this, "Удалено из избранных", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "Ошибка при удалении", Toast.LENGTH_SHORT).show();
-                }
-            }
-            return true;
-        } else if (item.getItemId() == R.id.watched_menu_btn) {
-            if (animeDatabase.getWatched() == 0) {
-                boolean result = dbManager.addWatchedAnime(animeInfo.getIdShiki());
-                if (result) {
-                    Drawable icon = item.getIcon();
-                    if (icon != null) {
-                        icon.mutate();
-                        icon.setColorFilter(getResources().getColor(R.color.color_green), PorterDuff.Mode.SRC_ATOP);
-                    }
-                    Toast.makeText(this, "Добавленно в просмотренные", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "Ошибка при добавлении", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                boolean result = dbManager.diasableWatchedAnime(animeInfo.getIdShiki());
-                if (result) {
-                    Drawable icon = item.getIcon();
-                    if (icon != null) {
-                        icon.mutate();
-                        icon.setColorFilter(getResources().getColor(R.color.gray_finish), PorterDuff.Mode.SRC_ATOP);
-                    }
-                    Toast.makeText(this, "Удалено из просмотренных", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "Ошибка при удалении", Toast.LENGTH_SHORT).show();
-                }
-            }
-            return true;
-        } else if (android.R.id.home == item.getItemId()) {
+        Log.d("ANIME_INFO", animeDatabase.toString());
+        if (android.R.id.home == item.getItemId()) {
             onBackPressed();
             finish();
             return true;
-        } else {
-            return super.onOptionsItemSelected(item);
         }
+//        if (user == null) {
+//            Toast.makeText(this, "Для выполнения действия требуется авторизация", Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
+        if ((item.getItemId() == R.id.fav_menu_btn || item.getItemId() == R.id.izbran_menu_btn ||
+                item.getItemId() == R.id.watched_menu_btn) && user != null) {
+            if (item.getItemId() == R.id.fav_menu_btn) {
+                if (animeDatabase.getFavorite() == 0) {
+                    boolean result = dbManager.addFavoriteAnime(animeInfo.getIdShiki());
+                    if (result) {
+                        item.setIcon(R.drawable.ic_action_favorite);
+                        Drawable icon = item.getIcon();
+                        if (icon != null) {
+                            icon.mutate();
+                            icon.setColorFilter(getResources().getColor(R.color.color_red), PorterDuff.Mode.SRC_ATOP);
+                        }
+                        Toast.makeText(this, "Добавленно в любимое", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Ошибка при добавлении", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    boolean result = dbManager.diasableFavoriteAnime(animeInfo.getIdShiki());
+                    if (result) {
+                        item.setIcon(R.drawable.empty_favorite);
+                        Drawable icon = item.getIcon();
+                        if (icon != null) {
+                            icon.mutate();
+                            icon.setColorFilter(getResources().getColor(R.color.gray_finish), PorterDuff.Mode.SRC_ATOP);
+                        }
+                        Toast.makeText(this, "Удалено из любимых", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Ошибка при удалении", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                return true;
+            } else if (item.getItemId() == R.id.izbran_menu_btn) {
+                if (animeDatabase.getIzbran() == 0) {
+                    boolean result = dbManager.addIzbranAnime(animeInfo.getIdShiki());
+                    if (result) {
+                        item.setIcon(R.drawable.bookmark_full);
+                        Drawable icon = item.getIcon();
+                        if (icon != null) {
+                            icon.mutate();
+                            icon.setColorFilter(getResources().getColor(R.color.color_yellow), PorterDuff.Mode.SRC_ATOP);
+                        }
+                        Toast.makeText(this, "Добавленно в избранное", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Ошибка при добавлении", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    boolean result = dbManager.diasableIzbranAnime(animeInfo.getIdShiki());
+                    if (result) {
+                        item.setIcon(R.drawable.bookmark_empty);
+                        Drawable icon = item.getIcon();
+                        if (icon != null) {
+                            icon.mutate();
+                            icon.setColorFilter(getResources().getColor(R.color.gray_finish), PorterDuff.Mode.SRC_ATOP);
+                        }
+                        Toast.makeText(this, "Удалено из избранных", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Ошибка при удалении", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                return true;
+            } else if (item.getItemId() == R.id.watched_menu_btn) {
+                if (animeDatabase.getWatched() == 0) {
+                    boolean result = dbManager.addWatchedAnime(animeInfo.getIdShiki());
+                    if (result) {
+                        Drawable icon = item.getIcon();
+                        if (icon != null) {
+                            icon.mutate();
+                            icon.setColorFilter(getResources().getColor(R.color.color_green), PorterDuff.Mode.SRC_ATOP);
+                        }
+                        Toast.makeText(this, "Добавленно в просмотренные", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Ошибка при добавлении", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    boolean result = dbManager.diasableWatchedAnime(animeInfo.getIdShiki());
+                    if (result) {
+                        Drawable icon = item.getIcon();
+                        if (icon != null) {
+                            icon.mutate();
+                            icon.setColorFilter(getResources().getColor(R.color.gray_finish), PorterDuff.Mode.SRC_ATOP);
+                        }
+                        Toast.makeText(this, "Удалено из просмотренных", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(this, "Ошибка при удалении", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                return true;
+            }
+        } else if (user != null) {
+            Toast.makeText(this, "Для выполнения действия требуется авторизация", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     //    String video = "<iframe src=https://video.sibnet.ru/shell.php?videoid=5526533&share=1></iframe>";
@@ -233,6 +242,7 @@ public class AnimePageActivity extends AppCompatActivity implements View.OnClick
 //            throw new RuntimeException(e);
 //        }
         if (actionBar != null) {
+            actionBar.setTitle("");
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -243,7 +253,7 @@ public class AnimePageActivity extends AppCompatActivity implements View.OnClick
 //        float density = displaymetrics.density;
 //        episode_1_1080p.m3u8
         Bundle bundle = getIntent().getBundleExtra("bund");
-        animeInfo = new AnimePageInfo(bundle, getApplicationContext(),this);
+        animeInfo = new AnimePageInfo(bundle, getApplicationContext(), this);
         setValuesInViews();
 //        Log.d("Size_screen","width: "+width+"\nheight: "+height+"\ndens: "+density);
 //        String video;
@@ -266,7 +276,11 @@ public class AnimePageActivity extends AppCompatActivity implements View.OnClick
 
     public void setValuesInViews() {
         titleAnime.setText(animeInfo.getNameAnime());
-        descrAnime.setText(animeInfo.getDescription());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            descrAnime.setText(Html.fromHtml(animeInfo.getDescription(), Html.FROM_HTML_MODE_COMPACT));
+        } else {
+            descrAnime.setText(Html.fromHtml(animeInfo.getDescription()));
+        }
         PG.setText(animeInfo.getPG());
         genresDescr.setText(animeInfo.getGenres());
         Log.d("series", "" + animeInfo.getSeries());
@@ -298,25 +312,31 @@ public class AnimePageActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onBackPressed() {
+        Intent intent = new Intent();
+        intent.putExtra("edited", edited_obj);
+        intent.putExtra("index", getIntent().getIntExtra("index", -1));
+        intent.putExtra("id", animeInfo.getIdShiki());
+        Log.d("player", "index" + intent.getIntExtra("index", -1));
+        this.setResult(RESULT_OK, intent);
         super.onBackPressed();
-        if (animeInfo.isHasVideo()&& player!= null) {
+        if (animeInfo.isHasVideo() && player != null) {
             player.pause();
         }
-        Log.d("player",""+edited_obj+"\nid: "+animeInfo.getIdShiki());
+        Log.d("player", "" + edited_obj + "\nid: " + animeInfo.getIdShiki());
         finish();
     }
 
     @Override
     protected void onDestroy() {
         Intent intent = new Intent();
-        intent.putExtra("edited",edited_obj);
-        intent.putExtra("index",getIntent().getIntExtra("index",-1));
-        intent.putExtra("id",animeInfo.getIdShiki());
-        Log.d("player","index"+intent.getIntExtra("index",-1));
-        setResult(RESULT_OK,intent);
+        intent.putExtra("edited", edited_obj);
+        intent.putExtra("index", getIntent().getIntExtra("index", -1));
+        intent.putExtra("id", animeInfo.getIdShiki());
+        Log.d("player", "index" + intent.getIntExtra("index", -1));
+        this.setResult(RESULT_OK, intent);
         super.onDestroy();
 
-        if (animeInfo.isHasVideo() && player!=null) {
+        if (animeInfo.isHasVideo() && player != null) {
             player.pause();
         }
 //        Log.d("player",""+edited_obj+"\nid: "+animeInfo.getIdShiki());
@@ -324,13 +344,13 @@ public class AnimePageActivity extends AppCompatActivity implements View.OnClick
 //        intent.putExtra("edited",edited_obj);
 //        intent.putExtra("index",getIntent().getIntExtra("index",-1));
 //        intent.putExtra("id",animeInfo.getIdShiki());
-        setResult(RESULT_OK,intent);
+//        setResult(RESULT_OK, intent);
         finish();
     }
 
     @Override
     public void onClick(View v) {
-        if (animeInfo.getScaningVideo()=="ready" &&animeInfo.isHasVideo()) {
+        if (animeInfo.getScaningVideo() == "ready" && animeInfo.isHasVideo()) {
             if (animeInfo.isHasVideo()) {
                 Animation animUpIMageBtn = AnimationUtils.loadAnimation(this, R.anim.element_out);
                 poster.startAnimation(animUpIMageBtn);
@@ -345,8 +365,8 @@ public class AnimePageActivity extends AppCompatActivity implements View.OnClick
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         playVideo(AnimePageInfo.convertToUrlSovetRom(
-                                1,animeInfo.getVersion(),
-                                animeInfo.getSovetId(),animeInfo.getFolderInSite()
+                                1, animeInfo.getVersion(),
+                                animeInfo.getSovetId(), animeInfo.getFolderInSite()
                         ));
                     }
 
@@ -359,13 +379,22 @@ public class AnimePageActivity extends AppCompatActivity implements View.OnClick
                 playerView.setVisibility(View.VISIBLE);
 //                player.setPlayWhenReady(true);
             } else {
+                Log.d("No_video","first_else");
+                Animation noVideoAnimation = AnimationUtils.loadAnimation(this,
+                        R.anim.no_anime_in_page);
+                poster.startAnimation(noVideoAnimation);
                 Toast.makeText(this, "На данной странице нет видео", Toast.LENGTH_SHORT).show();
             }
-        }else if (animeInfo.isHasVideo()){
-            Animation anim = AnimationUtils.loadAnimation(this,R.anim.selected_item);
+        } else if (animeInfo.isHasVideo()) {
+            Animation anim = AnimationUtils.loadAnimation(this,
+                    R.anim.selected_item);
             poster.startAnimation(anim);
             Toast.makeText(this, "Видео готовится", Toast.LENGTH_SHORT).show();
-        }else{
+        } else {
+            Log.d("No_video","second_else");
+            Animation noVideoAnimation = AnimationUtils.loadAnimation(this,
+                    R.anim.no_anime_in_page);
+            poster.startAnimation(noVideoAnimation);
             Toast.makeText(this, "На данной странице нет видео", Toast.LENGTH_SHORT).show();
         }
     }

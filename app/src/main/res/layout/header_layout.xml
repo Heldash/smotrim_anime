@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/avatar_user_drawer"
+            android:id="@+id/avatar_user"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center"

@@ -41,7 +41,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class FragmentWatched extends Fragment implements AnimeAdapter.OnAnimeClickListener{
+public class FragmentWatched extends Fragment implements AnimeAdapter.OnAnimeClickListener {
 
     public FragmentWatched() {
 
@@ -65,6 +65,13 @@ public class FragmentWatched extends Fragment implements AnimeAdapter.OnAnimeCli
                 null, 4));
         user = mAuth.getCurrentUser();
         database = FirebaseDatabase.getInstance();
+        database.getReference().child("tokens").get()
+                .addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                        tokens = task.getResult().getValue(TokenShiki.class);
+                    }
+                });
     }
 
     public void inicializeAdapter() {
@@ -137,7 +144,6 @@ public class FragmentWatched extends Fragment implements AnimeAdapter.OnAnimeCli
     public void onAnimeClick(AnimeItem anime, int position) {
         Bundle bundle = new Bundle();
 //        startActivity(new Intent(getContext(), AnimePageActivity.class),bundle);
-        shikiSendInfo(bundle, anime);
         Call<ArrayList<SovetRomanResSearch>> call = romanApi.getAnimeForName(anime.getTitleName());
         bundle.putInt("idShiki", anime.getId());
         bundle.putString("nameAnime", anime.getTitleName());

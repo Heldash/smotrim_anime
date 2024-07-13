@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".rec_views.AnimeMainList">
 
     <RelativeLayout
@@ -12,8 +13,48 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/anime_top_list"
             android:layout_width="match_parent"
+            android:visibility="invisible"
             android:layout_height="match_parent"
             android:descendantFocusability="blocksDescendants"
             android:layout_margin="5dp" />
+        <ImageView
+            android:id="@+id/load_list_animation"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:visibility="visible"
+            android:layout_centerInParent="true"
+            android:src="@drawable/animation_loading_dots"
+            app:tint="@color/gray_finish"/>
+<!--        <pl.droidsonroids.gif.GifImageView-->
+<!--            android:id="@+id/load_list_animation"-->
+<!--            android:layout_width="200dp"-->
+<!--            android:visibility="visible"-->
+<!--            android:layout_height="200dp"-->
+<!--            android:layout_centerInParent="true"-->
+<!--            android:src="@drawable/loading_animation" />-->
+        <RelativeLayout
+            android:id="@+id/no_internet_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_centerInParent="true">
+            <ImageView
+                android:id="@+id/no_internet_image"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/no_internet"
+                app:tint="@color/gray_finish"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/no_internet_image"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:text="Отсутствует поключение к интернету"/>
+
+
+        </RelativeLayout>
+
     </RelativeLayout>
 </FrameLayout>
